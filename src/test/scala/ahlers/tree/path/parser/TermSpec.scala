@@ -1,5 +1,6 @@
 package ahlers.tree.path.parser
 
+import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
 import ahlers.tree.path.term.Wildcard
 import ahlers.tree.path.term.diffx.instances._
@@ -14,31 +15,17 @@ import parsley.diffx.instances._
 
 class TermSpec extends AnyWordSpec {
 
-  "Wildcard" should {
-    """accept "*"""" in {
-      term.wildcard.parse("*").shouldMatchTo(Success(Wildcard))
-    }
-
-    "reject else" in {
-      forAll { input: String =>
-        whenever("*" != input) {
-          term.wildcard.parse(input).shouldBe(a[Failure[_]])
-        }
-      }
-    }
-  }
-
-  "Name" should {
-    """accept alpha-numeric""" in {
-      forAll { name: Name =>
-        term.name.parse(name.toText).shouldMatchTo(Success(name))
+  "Index" should {
+    """accept positive or negative numeric""" in {
+      forAll { index: Index =>
+        term.index.parse(index.toText).shouldMatchTo(Success(index))
       }
     }
 
     "reject else" in {
       forAll { input: String =>
-        whenever(!input.matches("^[a-zA-Z0-9]+$")) {
-          term.wildcard.parse(input).shouldBe(a[Failure[_]])
+        whenever(!input.matches("^[0-9]+$")) {
+          term.index.parse(input).shouldBe(a[Failure[_]])
         }
       }
     }

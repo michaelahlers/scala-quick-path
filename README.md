@@ -1,1 +1,1 @@
-# Object Path for Scala
+# Tree Path for Scala

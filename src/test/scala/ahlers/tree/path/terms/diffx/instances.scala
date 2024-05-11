@@ -1,7 +1,7 @@
-package ahlers.tree.path.term.diffx
+package ahlers.tree.path.terms.diffx
 
-import ahlers.tree.path.term.Index
-import ahlers.tree.path.term.Name
+import ahlers.tree.path.terms.Index
+import ahlers.tree.path.terms.Name
 import com.softwaremill.diffx.Diff
 
 object instances {

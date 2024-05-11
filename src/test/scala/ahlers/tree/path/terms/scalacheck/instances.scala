@@ -1,7 +1,7 @@
-package ahlers.tree.path.term.scalacheck
+package ahlers.tree.path.terms.scalacheck
 
-import ahlers.tree.path.term.Index
-import ahlers.tree.path.term.Name
+import ahlers.tree.path.terms.Index
+import ahlers.tree.path.terms.Name
 import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
 

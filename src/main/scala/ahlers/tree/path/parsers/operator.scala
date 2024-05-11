@@ -1,8 +1,8 @@
-package ahlers.tree.path.parser
+package ahlers.tree.path.parsers
 
-import ahlers.tree.path.operator.Operator.{ArrayIndexes, ArraySlice, BracketNotatedChildren, CurrentNode, DeepScan, DotNotatedChild, RootElement, Wildcard}
-import ahlers.tree.path.parser.term.index
-import ahlers.tree.path.parser.term.name
+import ahlers.tree.path.operators.Operator.{ArrayIndexes, ArraySlice, BracketNotatedChildren, CurrentNode, DeepScan, DotNotatedChild, RootElement, Wildcard}
+import ahlers.tree.path.parsers.term.index
+import ahlers.tree.path.parsers.term.name
 import parsley.Parsley
 import parsley.Parsley.atomic
 import parsley.character.char

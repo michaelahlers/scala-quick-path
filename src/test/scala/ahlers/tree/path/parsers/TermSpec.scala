@@ -1,9 +1,9 @@
-package ahlers.tree.path.parser
+package ahlers.tree.path.parsers
 
-import ahlers.tree.path.term.Index
-import ahlers.tree.path.term.Name
-import ahlers.tree.path.term.diffx.instances._
-import ahlers.tree.path.term.scalacheck.instances._
+import ahlers.tree.path.terms.Index
+import ahlers.tree.path.terms.Name
+import ahlers.tree.path.terms.diffx.instances._
+import ahlers.tree.path.terms.scalacheck.instances._
 import com.softwaremill.diffx.scalatest.DiffShouldMatcher.convertToAnyShouldMatcher
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec

@@ -1,15 +1,15 @@
-package ahlers.tree.path.operator.scalacheck
+package ahlers.tree.path.operators.scalacheck
 
-import ahlers.tree.path.operator.Operator.ArrayIndexes
-import ahlers.tree.path.operator.Operator.ArraySlice
-import ahlers.tree.path.operator.Operator.BracketNotatedChildren
-import ahlers.tree.path.operator.Operator.CurrentNode
-import ahlers.tree.path.operator.Operator.DeepScan
-import ahlers.tree.path.operator.Operator.DotNotatedChild
-import ahlers.tree.path.operator.Operator.RootElement
-import ahlers.tree.path.operator.Operator.Wildcard
-import ahlers.tree.path.term.Name
-import ahlers.tree.path.term.scalacheck.instances._
+import ahlers.tree.path.operators.Operator.ArrayIndexes
+import ahlers.tree.path.operators.Operator.ArraySlice
+import ahlers.tree.path.operators.Operator.BracketNotatedChildren
+import ahlers.tree.path.operators.Operator.CurrentNode
+import ahlers.tree.path.operators.Operator.DeepScan
+import ahlers.tree.path.operators.Operator.DotNotatedChild
+import ahlers.tree.path.operators.Operator.RootElement
+import ahlers.tree.path.operators.Operator.Wildcard
+import ahlers.tree.path.terms.Name
+import ahlers.tree.path.terms.scalacheck.instances._
 import magnolify.scalacheck.semiauto._
 import org.scalacheck.Arbitrary
 import org.scalacheck.Arbitrary.arbitrary

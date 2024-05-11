@@ -1,7 +1,7 @@
-package ahlers.tree.path.operator.diffx
+package ahlers.tree.path.operators.diffx
 
-import ahlers.tree.path.operator.Operator.{ArrayIndexes, ArraySlice, BracketNotatedChildren, CurrentNode, DeepScan, DotNotatedChild, RootElement, Wildcard}
-import ahlers.tree.path.term.diffx.instances._
+import ahlers.tree.path.operators.Operator.{ArrayIndexes, ArraySlice, BracketNotatedChildren, CurrentNode, DeepScan, DotNotatedChild, RootElement, Wildcard}
+import ahlers.tree.path.terms.diffx.instances._
 import com.softwaremill.diffx.Diff
 
 object instances {

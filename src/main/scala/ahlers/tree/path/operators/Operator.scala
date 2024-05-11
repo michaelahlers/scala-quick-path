@@ -1,7 +1,7 @@
-package ahlers.tree.path.operator
+package ahlers.tree.path.operators
 
-import ahlers.tree.path.term.Index
-import ahlers.tree.path.term.Name
+import ahlers.tree.path.terms.Index
+import ahlers.tree.path.terms.Name
 
 sealed trait Operator
 object Operator {

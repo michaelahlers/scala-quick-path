@@ -1,7 +1,7 @@
-package ahlers.tree.path.parser
+package ahlers.tree.path.parsers
 
-import ahlers.tree.path.term.Index
-import ahlers.tree.path.term.Name
+import ahlers.tree.path.terms.Index
+import ahlers.tree.path.terms.Name
 import parsley.Parsley
 import parsley.character.satisfy
 import parsley.character.stringOfSome

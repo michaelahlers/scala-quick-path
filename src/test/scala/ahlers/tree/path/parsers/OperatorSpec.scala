@@ -250,4 +250,14 @@ class OperatorSpec extends AnyWordSpec {
     }
   }
 
+  "Operator" should {
+    val parser = operator.any
+
+    """accept any""" in {
+      forAll { operator: Operator =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
+      }
+    }
+  }
+
 }

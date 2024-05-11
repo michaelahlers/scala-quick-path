@@ -9,6 +9,7 @@ import ahlers.tree.path.operators.DotNotatedChild
 import ahlers.tree.path.operators.Operator
 import ahlers.tree.path.operators.RootElement
 import ahlers.tree.path.operators.Wildcard
+import ahlers.tree.path.operators.algebra.IsOperator
 import ahlers.tree.path.terms.diffx.instances._
 import com.softwaremill.diffx.Diff
 
@@ -39,6 +40,14 @@ object instances {
   implicit val diffArraySliceBounded: Diff[ArraySlice.Bounded]           = Diff.derived
   implicit val diffArraySlice: Diff[ArraySlice]                          = Diff.derived
 
-  // implicit val diffOperator: Diff[Operator] = Diff.derived
+  implicit val diffOperator: Diff[Operator] = {
+    implicit val diffIsOperator: Diff[IsOperator] = {
+      import IsOperator.OfUnknown
+      implicit val diffOfUnknown: Diff[OfUnknown] = Diff.useEquals
+      Diff.derived
+    }
+
+    Diff[IsOperator].contramap(IsOperator(_))
+  }
 
 }

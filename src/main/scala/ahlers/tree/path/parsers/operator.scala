@@ -6,6 +6,7 @@ import ahlers.tree.path.operators.BracketNotatedChildren
 import ahlers.tree.path.operators.CurrentNode
 import ahlers.tree.path.operators.DeepScan
 import ahlers.tree.path.operators.DotNotatedChild
+import ahlers.tree.path.operators.Operator
 import ahlers.tree.path.operators.RootElement
 import ahlers.tree.path.operators.Wildcard
 import ahlers.tree.path.parsers.term.index
@@ -19,9 +20,9 @@ import parsley.combinator.sepBy
 
 object operator {
 
-  val currentNode: Parsley[CurrentNode.type] = char('@').as(CurrentNode)
-
   val rootElement: Parsley[RootElement.type] = char('$').as(RootElement)
+
+  val currentNode: Parsley[CurrentNode.type] = char('@').as(CurrentNode)
 
   val wildcard: Parsley[Wildcard.type] = char('*').as(Wildcard)
 
@@ -44,5 +45,15 @@ object operator {
   val arraySliceRightBounded: Parsley[ArraySlice.RightBounded] = (char('[') *> char(':') ~> index <~ char(']')).map(ArraySlice.RightBounded)
   val arraySliceBounded: Parsley[ArraySlice.Bounded]           = (char('[') *> index <~> char(':') *> index <~ char(']')).map((ArraySlice.Bounded(_, _)).tupled)
   val arraySlice: Parsley[ArraySlice]                          = atomic(arraySliceLeftBounded) | atomic(arraySliceRightBounded) | atomic(arraySliceBounded)
+
+  val any: Parsley[Operator] =
+    atomic(rootElement) |
+      atomic(currentNode) |
+      atomic(wildcard) |
+      atomic(deepScan) |
+      atomic(dotNotatedChild) |
+      atomic(bracketNotatedChildren) |
+      atomic(arrayIndexes) |
+      atomic(arraySlice)
 
 }

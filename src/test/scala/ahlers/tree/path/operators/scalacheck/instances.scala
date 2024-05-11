@@ -6,8 +6,10 @@ import ahlers.tree.path.operators.BracketNotatedChildren
 import ahlers.tree.path.operators.CurrentNode
 import ahlers.tree.path.operators.DeepScan
 import ahlers.tree.path.operators.DotNotatedChild
+import ahlers.tree.path.operators.Operator
 import ahlers.tree.path.operators.RootElement
 import ahlers.tree.path.operators.Wildcard
+import ahlers.tree.path.operators.algebra.IsOperator
 import ahlers.tree.path.terms.Name
 import ahlers.tree.path.terms.scalacheck.instances._
 import magnolify.scalacheck.semiauto._
@@ -41,5 +43,16 @@ object instances {
   implicit val arbArraySliceRightBounded: Arbitrary[ArraySlice.RightBounded] = ArbitraryDerivation[ArraySlice.RightBounded]
   implicit val arbArraySliceBounded: Arbitrary[ArraySlice.Bounded]           = ArbitraryDerivation[ArraySlice.Bounded]
   implicit val arbArraySlice: Arbitrary[ArraySlice]                          = ArbitraryDerivation[ArraySlice]
+
+  implicit val arbOperator: Arbitrary[Operator] = Arbitrary(Gen.oneOf(
+    arbitrary[CurrentNode.type],
+    arbitrary[RootElement.type],
+    arbitrary[Wildcard.type],
+    arbitrary[DeepScan.type],
+    arbitrary[DotNotatedChild],
+    arbitrary[BracketNotatedChildren],
+    arbitrary[ArrayIndexes],
+    arbitrary[ArraySlice],
+  ))
 
 }

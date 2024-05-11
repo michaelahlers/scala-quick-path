@@ -1,3 +1,5 @@
 package ahlers.tree.path.term
 
-object Wildcard
+case object Wildcard {
+  val toText: String = "*"
+}

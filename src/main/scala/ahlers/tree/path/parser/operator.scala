@@ -3,9 +3,11 @@ package ahlers.tree.path.parser
 import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
+import ahlers.tree.path.operator.Operator.ArrayIndexes
 import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
+import ahlers.tree.path.parser.term.index
 import ahlers.tree.path.parser.term.name
 import ahlers.tree.path.parser.term.wildcard
 import parsley.Parsley
@@ -33,5 +35,7 @@ object operator {
     val childMatchingWildcard: Parsley[Child.MatchingWildcard.type] = wildcard.as(Child.MatchingWildcard)
     (char('[') *> sepBy(atomic(childMatchingName) | atomic(childMatchingWildcard), whitespaces *> char(',') <* whitespaces) <* char(']')).map(BracketNotatedChildren(_))
   }
+
+  val arrayIndexes: Parsley[ArrayIndexes] = (char('[') *> sepBy(index, whitespaces *> char(',') <* whitespaces) <* char(']')).map(ArrayIndexes)
 
 }

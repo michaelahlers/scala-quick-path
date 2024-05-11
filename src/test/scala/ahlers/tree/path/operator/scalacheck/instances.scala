@@ -3,6 +3,7 @@ package ahlers.tree.path.operator.scalacheck
 import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
+import ahlers.tree.path.operator.Operator.ArrayIndexes
 import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
@@ -30,5 +31,7 @@ object instances {
     implicit val arbChild: Arbitrary[Child] = ArbitraryDerivation[Child]
     ArbitraryDerivation[BracketNotatedChildren]
   }
+
+  implicit val arbArrayIndexes: Arbitrary[ArrayIndexes] = ArbitraryDerivation[ArrayIndexes]
 
 }

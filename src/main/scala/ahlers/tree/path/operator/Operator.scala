@@ -1,5 +1,6 @@
 package ahlers.tree.path.operator
 
+import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
 import ahlers.tree.path.term.Wildcard
 
@@ -52,6 +53,10 @@ object Operator {
         override val toText: String   = s"${toWildcard.toText}"
       }
     }
+  }
+
+  case class ArrayIndexes(toIndexes: Seq[Index]) {
+    val toText: String = toIndexes.map(_.toText).mkString("[", ",", "]")
   }
 
 }

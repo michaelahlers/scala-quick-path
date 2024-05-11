@@ -1,6 +1,13 @@
 ThisBuild / scalaVersion := "2.13.14"
 
 /**
+ * Parsley is a fast and modern parser combinator library for Scala.
+ * @see [[https://github.com/j-mie6/parsley]]
+ */
+libraryDependencies +=
+   "com.github.j-mie6" %% "parsley" % "4.5.2"
+
+/**
  * ScalaTest is the most flexible and most popular testing tool in the Scala ecosystem.
  * @see [[https://www.scalatest.org/]]
  */

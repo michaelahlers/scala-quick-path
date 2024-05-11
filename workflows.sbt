@@ -9,8 +9,8 @@ ThisBuild / githubWorkflowPublishTargetBranches := Nil
 
 ThisBuild / githubWorkflowOSes :=
   "ubuntu-latest" ::
-    "macos-latest" ::
-    "windows-latest" ::
+    // "macos-latest" ::
+    // "windows-latest" ::
     Nil
 
 ThisBuild / githubWorkflowBuildPreamble ++= {

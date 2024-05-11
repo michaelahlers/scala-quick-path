@@ -3,6 +3,7 @@ package ahlers.tree.path.operator.diffx
 import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
+import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
 import ahlers.tree.path.term.diffx.instances._
@@ -19,5 +20,11 @@ object instances {
   implicit val diffDotNotatedChildMatchingName: Diff[DotNotatedChild.MatchingName]              = Diff.derived
   implicit val diffDotNotatedChildMatchingWildcard: Diff[DotNotatedChild.MatchingWildcard.type] = Diff.derived
   implicit val diffDotNotatedChild: Diff[DotNotatedChild]                                       = Diff.derived
+
+  implicit val diffBracketNotatedChildren: Diff[BracketNotatedChildren] = {
+    import BracketNotatedChildren.Child
+    implicit val diffChild: Diff[Child] = Diff.derived
+    Diff.derived
+  }
 
 }

@@ -3,6 +3,7 @@ package ahlers.tree.path.parser
 import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
+import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
 import ahlers.tree.path.operator.diffx.instances._
@@ -133,8 +134,26 @@ class OperatorSpec extends AnyWordSpec {
 
     s"""accept $pattern""" in {
       forAll { dotNotatedChild: DotNotatedChild =>
-        println(dotNotatedChild.toText)
         parser.parse(dotNotatedChild.toText).shouldMatchTo(Success(dotNotatedChild))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!pattern.matches(input)) {
+          parser.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "BracketNotatedChild" should {
+    val parser  = operator.bracketNotatedChildren
+    val pattern = "^\\[('[a-zA-Z0-9]+'|\\*)\\w*(,\\w*'[a-zA-Z0-9]+'|\\*)\\]$".r
+
+    s"""accept $pattern""" in {
+      forAll { bracketNotatedChildren: BracketNotatedChildren =>
+        parser.parse(bracketNotatedChildren.toText).shouldMatchTo(Success(bracketNotatedChildren))
       }
     }
 

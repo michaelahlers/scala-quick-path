@@ -3,6 +3,7 @@ package ahlers.tree.path.parser
 import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
+import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
 import ahlers.tree.path.parser.term.name
@@ -11,6 +12,8 @@ import parsley.Parsley
 import parsley.Parsley.atomic
 import parsley.character.char
 import parsley.character.string
+import parsley.character.whitespaces
+import parsley.combinator.sepBy
 
 object operator {
 
@@ -23,5 +26,12 @@ object operator {
   val dotNotatedChildMatchingName: Parsley[DotNotatedChild.MatchingName]              = (char('.') *> name).map(DotNotatedChild.MatchingName)
   val dotNotatedChildMatchingWildcard: Parsley[DotNotatedChild.MatchingWildcard.type] = (char('.') *> wildcard).as(DotNotatedChild.MatchingWildcard)
   val dotNotatedChild: Parsley[DotNotatedChild]                                       = atomic(dotNotatedChildMatchingName) | atomic(dotNotatedChildMatchingWildcard)
+
+  val bracketNotatedChildren: Parsley[BracketNotatedChildren] = {
+    import BracketNotatedChildren.Child
+    val childMatchingName: Parsley[Child.MatchingName]              = (char('\'') *> name <* char('\'')).map(Child.MatchingName)
+    val childMatchingWildcard: Parsley[Child.MatchingWildcard.type] = wildcard.as(Child.MatchingWildcard)
+    (char('[') *> sepBy(atomic(childMatchingName) | atomic(childMatchingWildcard), whitespaces *> char(',') <* whitespaces) <* char(']')).map(BracketNotatedChildren(_))
+  }
 
 }

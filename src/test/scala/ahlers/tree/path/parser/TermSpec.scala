@@ -44,4 +44,34 @@ class TermSpec extends AnyWordSpec {
     }
   }
 
+  "Name" should {
+    """accept alpha-numeric""" in {
+      forAll { name: Name =>
+        term.name.parse(name.toText).shouldMatchTo(Success(name))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!input.matches("^[a-zA-Z0-9]+$")) {
+          term.name.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "Wildcard" should {
+    """accept "*"""" in {
+      term.wildcard.parse("*").shouldMatchTo(Success(Wildcard))
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever("*" != input) {
+          term.wildcard.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
 }

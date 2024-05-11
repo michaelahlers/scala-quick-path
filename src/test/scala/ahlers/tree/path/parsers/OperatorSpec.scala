@@ -1,6 +1,6 @@
 package ahlers.tree.path.parsers
 
-import ahlers.tree.path.operators.Operator._
+import ahlers.tree.path.operators._
 import ahlers.tree.path.operators.diffx.instances._
 import ahlers.tree.path.operators.scalacheck.instances._
 import com.softwaremill.diffx.scalatest.DiffShouldMatcher.convertToAnyShouldMatcher

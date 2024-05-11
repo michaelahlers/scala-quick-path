@@ -1,13 +1,13 @@
 package ahlers.tree.path.operators.diffx
 
-import ahlers.tree.path.operators.Operator.ArrayIndexes
-import ahlers.tree.path.operators.Operator.ArraySlice
-import ahlers.tree.path.operators.Operator.BracketNotatedChildren
-import ahlers.tree.path.operators.Operator.CurrentNode
-import ahlers.tree.path.operators.Operator.DeepScan
-import ahlers.tree.path.operators.Operator.DotNotatedChild
-import ahlers.tree.path.operators.Operator.RootElement
-import ahlers.tree.path.operators.Operator.Wildcard
+import ahlers.tree.path.operators.ArrayIndexes
+import ahlers.tree.path.operators.ArraySlice
+import ahlers.tree.path.operators.BracketNotatedChildren
+import ahlers.tree.path.operators.CurrentNode
+import ahlers.tree.path.operators.DeepScan
+import ahlers.tree.path.operators.DotNotatedChild
+import ahlers.tree.path.operators.RootElement
+import ahlers.tree.path.operators.Wildcard
 import ahlers.tree.path.terms.diffx.instances._
 import com.softwaremill.diffx.Diff
 

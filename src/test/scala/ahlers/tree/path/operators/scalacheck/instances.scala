@@ -10,6 +10,7 @@ import ahlers.tree.path.operators.Operator
 import ahlers.tree.path.operators.RootElement
 import ahlers.tree.path.operators.Wildcard
 import ahlers.tree.path.operators.algebra.IsOperator
+import ahlers.tree.path.terms.Index
 import ahlers.tree.path.terms.Name
 import ahlers.tree.path.terms.scalacheck.instances._
 import magnolify.scalacheck.semiauto._
@@ -31,13 +32,20 @@ object instances {
   implicit val arbDotNotatedChildMatchingWildcard: Arbitrary[DotNotatedChild.MatchingWildcard.type] = ArbitraryDerivation[DotNotatedChild.MatchingWildcard.type]
   implicit val arbDotNotatedChild: Arbitrary[DotNotatedChild]                                       = ArbitraryDerivation[DotNotatedChild]
 
-  implicit val arbBracketNotatedChildren: Arbitrary[BracketNotatedChildren] = {
+  implicit val arbBracketNotatedChildren: Arbitrary[BracketNotatedChildren] = Arbitrary {
     import BracketNotatedChildren.Child
     implicit val arbChild: Arbitrary[Child] = ArbitraryDerivation[Child]
-    ArbitraryDerivation[BracketNotatedChildren]
+
+    for {
+      head <- arbitrary[Child]
+      tail <- arbitrary[Seq[Child]]
+    } yield BracketNotatedChildren(head +: tail)
   }
 
-  implicit val arbArrayIndexes: Arbitrary[ArrayIndexes] = ArbitraryDerivation[ArrayIndexes]
+  implicit val arbArrayIndexes: Arbitrary[ArrayIndexes] = Arbitrary(for {
+    head <- arbitrary[Index]
+    tail <- arbitrary[Seq[Index]]
+  } yield ArrayIndexes(head +: tail))
 
   implicit val arbArraySliceLeftBounded: Arbitrary[ArraySlice.LeftBounded]   = ArbitraryDerivation[ArraySlice.LeftBounded]
   implicit val arbArraySliceRightBounded: Arbitrary[ArraySlice.RightBounded] = ArbitraryDerivation[ArraySlice.RightBounded]

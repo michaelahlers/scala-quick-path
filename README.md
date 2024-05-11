@@ -1,1 +1,1 @@
-# scala-quick-path
+# Object Path for Scala

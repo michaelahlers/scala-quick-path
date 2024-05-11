@@ -1,5 +1,5 @@
-name           := "Scala Quick Path"
-normalizedName := "scala-quick-path"
+name           := "Scala Object Path"
+normalizedName := "scala-object-path"
 
 developers += Developer(
   id = "michaelahlers",

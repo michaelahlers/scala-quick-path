@@ -16,46 +16,52 @@ import parsley.diffx.instances._
 class TermSpec extends AnyWordSpec {
 
   "Index" should {
+    val parser = term.index
+
     """accept positive or negative numeric""" in {
       forAll { index: Index =>
-        term.index.parse(index.toText).shouldMatchTo(Success(index))
+        parser.parse(index.toText).shouldMatchTo(Success(index))
       }
     }
 
     "reject else" in {
       forAll { input: String =>
         whenever(!input.matches("^[0-9]+$")) {
-          term.index.parse(input).shouldBe(a[Failure[_]])
+          parser.parse(input).shouldBe(a[Failure[_]])
         }
       }
     }
   }
 
   "Name" should {
+    val parser = term.name
+
     """accept alpha-numeric""" in {
       forAll { name: Name =>
-        term.name.parse(name.toText).shouldMatchTo(Success(name))
+        parser.parse(name.toText).shouldMatchTo(Success(name))
       }
     }
 
     "reject else" in {
       forAll { input: String =>
         whenever(!input.matches("^[a-zA-Z0-9]+$")) {
-          term.name.parse(input).shouldBe(a[Failure[_]])
+          parser.parse(input).shouldBe(a[Failure[_]])
         }
       }
     }
   }
 
   "Wildcard" should {
+    val parser = term.wildcard
+
     """accept "*"""" in {
-      term.wildcard.parse("*").shouldMatchTo(Success(Wildcard))
+      parser.parse("*").shouldMatchTo(Success(Wildcard))
     }
 
     "reject else" in {
       forAll { input: String =>
         whenever("*" != input) {
-          term.wildcard.parse(input).shouldBe(a[Failure[_]])
+          parser.parse(input).shouldBe(a[Failure[_]])
         }
       }
     }

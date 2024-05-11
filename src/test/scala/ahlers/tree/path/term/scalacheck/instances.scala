@@ -3,7 +3,6 @@ package ahlers.tree.path.term.scalacheck
 import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
 import ahlers.tree.path.term.Wildcard
-//import magnolify.scalacheck.semiauto._
 import org.scalacheck.Arbitrary
 import org.scalacheck.Gen
 

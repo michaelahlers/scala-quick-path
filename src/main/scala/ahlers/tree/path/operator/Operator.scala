@@ -14,4 +14,8 @@ object Operator {
     }
   }
 
+  case object DeepScan extends Operator {
+    val toText: String = ".."
+  }
+
 }

@@ -8,6 +8,7 @@ import ahlers.tree.path.operator.Operator.DotNotatedChild
 import ahlers.tree.path.parser.term.name
 import ahlers.tree.path.parser.term.wildcard
 import parsley.Parsley
+import parsley.Parsley.atomic
 import parsley.character.char
 import parsley.character.string
 
@@ -21,6 +22,6 @@ object operator {
 
   val dotNotatedChildMatchingName: Parsley[DotNotatedChild.MatchingName]              = (char('.') *> name).map(DotNotatedChild.MatchingName)
   val dotNotatedChildMatchingWildcard: Parsley[DotNotatedChild.MatchingWildcard.type] = (char('.') *> wildcard).as(DotNotatedChild.MatchingWildcard)
-  val dotNotatedChild: Parsley[DotNotatedChild]                                       = char('.') *> (name.map(DotNotatedChild.MatchingName) | wildcard.as(DotNotatedChild.MatchingWildcard))
+  val dotNotatedChild: Parsley[DotNotatedChild]                                       = atomic(dotNotatedChildMatchingName) | atomic(dotNotatedChildMatchingWildcard)
 
 }

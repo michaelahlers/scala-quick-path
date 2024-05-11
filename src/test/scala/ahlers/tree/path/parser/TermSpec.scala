@@ -16,9 +16,10 @@ import parsley.diffx.instances._
 class TermSpec extends AnyWordSpec {
 
   "Index" should {
-    val parser = term.index
+    val parser  = term.index
+    val pattern = "^[0-9]+$".r
 
-    """accept positive or negative numeric""" in {
+    s"""accept $pattern""" in {
       forAll { index: Index =>
         parser.parse(index.toText).shouldMatchTo(Success(index))
       }
@@ -26,7 +27,7 @@ class TermSpec extends AnyWordSpec {
 
     "reject else" in {
       forAll { input: String =>
-        whenever(!input.matches("^[0-9]+$")) {
+        whenever(!pattern.matches(input)) {
           parser.parse(input).shouldBe(a[Failure[_]])
         }
       }
@@ -34,9 +35,10 @@ class TermSpec extends AnyWordSpec {
   }
 
   "Name" should {
-    val parser = term.name
+    val parser  = term.name
+    val pattern = "^[a-zA-Z0-9]+$".r
 
-    """accept alpha-numeric""" in {
+    s"""accept $pattern""" in {
       forAll { name: Name =>
         parser.parse(name.toText).shouldMatchTo(Success(name))
       }
@@ -44,7 +46,7 @@ class TermSpec extends AnyWordSpec {
 
     "reject else" in {
       forAll { input: String =>
-        whenever(!input.matches("^[a-zA-Z0-9]+$")) {
+        whenever(!pattern.matches(input)) {
           parser.parse(input).shouldBe(a[Failure[_]])
         }
       }
@@ -52,15 +54,16 @@ class TermSpec extends AnyWordSpec {
   }
 
   "Wildcard" should {
-    val parser = term.wildcard
+    val parser  = term.wildcard
+    val pattern = "^\\*$".r
 
-    """accept "*"""" in {
-      parser.parse("*").shouldMatchTo(Success(Wildcard))
+    s"""accept $pattern""" in {
+      parser.parse(Wildcard.toText).shouldMatchTo(Success(Wildcard))
     }
 
     "reject else" in {
       forAll { input: String =>
-        whenever("*" != input) {
+        whenever(!pattern.matches(input)) {
           parser.parse(input).shouldBe(a[Failure[_]])
         }
       }

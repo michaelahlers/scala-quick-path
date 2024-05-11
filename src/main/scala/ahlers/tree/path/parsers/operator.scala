@@ -16,7 +16,7 @@ import parsley.Parsley.atomic
 import parsley.character.char
 import parsley.character.string
 import parsley.character.whitespaces
-import parsley.combinator.sepBy
+import parsley.combinator.sepBy1
 
 object operator {
 
@@ -36,10 +36,10 @@ object operator {
     import BracketNotatedChildren.Child
     val childMatchingName: Parsley[Child.MatchingName]              = (char('\'') *> name <* char('\'')).map(Child.MatchingName)
     val childMatchingWildcard: Parsley[Child.MatchingWildcard.type] = wildcard.as(Child.MatchingWildcard)
-    (char('[') *> sepBy(atomic(childMatchingName) | atomic(childMatchingWildcard), whitespaces *> char(',') <* whitespaces) <* char(']')).map(BracketNotatedChildren(_))
+    (char('[') *> sepBy1(atomic(childMatchingName) | atomic(childMatchingWildcard), whitespaces *> char(',') <* whitespaces) <* char(']')).map(BracketNotatedChildren(_))
   }
 
-  val arrayIndexes: Parsley[ArrayIndexes] = (char('[') *> sepBy(index, whitespaces *> char(',') <* whitespaces) <* char(']')).map(ArrayIndexes)
+  val arrayIndexes: Parsley[ArrayIndexes] = (char('[') *> sepBy1(index, whitespaces *> char(',') <* whitespaces) <* char(']')).map(ArrayIndexes)
 
   val arraySliceLeftBounded: Parsley[ArraySlice.LeftBounded]   = (char('[') *> index <~ char(':') <* char(']')).map(ArraySlice.LeftBounded)
   val arraySliceRightBounded: Parsley[ArraySlice.RightBounded] = (char('[') *> char(':') ~> index <~ char(']')).map(ArraySlice.RightBounded)

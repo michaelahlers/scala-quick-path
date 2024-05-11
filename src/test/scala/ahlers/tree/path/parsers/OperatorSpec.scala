@@ -3,7 +3,7 @@ package ahlers.tree.path.parsers
 import ahlers.tree.path.operators._
 import ahlers.tree.path.operators.diffx.instances._
 import ahlers.tree.path.operators.scalacheck.instances._
-import com.softwaremill.diffx.scalatest.DiffShouldMatcher.convertToAnyShouldMatcher
+import com.softwaremill.diffx.scalatest.DiffShouldMatcher._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
@@ -18,7 +18,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\$$".r
 
     s"""accept $pattern""" in {
-      parser.parse(RootElement.toText).shouldMatchTo(Success(RootElement))
+      val operator = RootElement
+      parser.parse(operator.toText).shouldMatchTo(Success(operator))
     }
 
     "reject else" in {
@@ -35,7 +36,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^@$".r
 
     s"""accept $pattern""" in {
-      parser.parse(CurrentNode.toText).shouldMatchTo(Success(CurrentNode))
+      val operator = CurrentNode
+      parser.parse(operator.toText).shouldMatchTo(Success(operator))
     }
 
     "reject else" in {
@@ -52,7 +54,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\*$".r
 
     s"""accept $pattern""" in {
-      parser.parse(Wildcard.toText).shouldMatchTo(Success(Wildcard))
+      val operator = Wildcard
+      parser.parse(operator.toText).shouldMatchTo(Success(operator))
     }
 
     "reject else" in {
@@ -69,7 +72,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\.\\.$".r
 
     s"""accept $pattern""" in {
-      parser.parse(DeepScan.toText).shouldMatchTo(Success(DeepScan))
+      val operator = DeepScan
+      parser.parse(operator.toText).shouldMatchTo(Success(operator))
     }
 
     "reject else" in {
@@ -86,8 +90,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\.[a-zA-Z0-9]+$".r
 
     s"""accept $pattern""" in {
-      forAll { dotNotatedChild: DotNotatedChild.MatchingName =>
-        parser.parse(dotNotatedChild.toText).shouldMatchTo(Success(dotNotatedChild))
+      forAll { operator: DotNotatedChild.MatchingName =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -105,7 +109,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\.\\*$".r
 
     s"""accept $pattern""" in {
-      parser.parse(DotNotatedChild.MatchingWildcard.toText).shouldMatchTo(Success(DotNotatedChild.MatchingWildcard))
+      val operator = DotNotatedChild.MatchingWildcard
+      parser.parse(operator.toText).shouldMatchTo(Success(operator))
     }
 
     "reject else" in {
@@ -122,8 +127,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\.([a-zA-Z0-9]+|\\*)$".r
 
     s"""accept $pattern""" in {
-      forAll { dotNotatedChild: DotNotatedChild =>
-        parser.parse(dotNotatedChild.toText).shouldMatchTo(Success(dotNotatedChild))
+      forAll { operator: DotNotatedChild =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -141,8 +146,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\[('[a-zA-Z0-9]+'|\\*)\\w*(,\\w*'[a-zA-Z0-9]+'|\\*)\\]$".r
 
     s"""accept $pattern""" in {
-      forAll { bracketNotatedChildren: BracketNotatedChildren =>
-        parser.parse(bracketNotatedChildren.toText).shouldMatchTo(Success(bracketNotatedChildren))
+      forAll { operator: BracketNotatedChildren =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -160,8 +165,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\[[0-9]+\\w*(,\\w*[0-9]+)\\]$".r
 
     s"""accept $pattern""" in {
-      forAll { arrayIndexes: ArrayIndexes =>
-        parser.parse(arrayIndexes.toText).shouldMatchTo(Success(arrayIndexes))
+      forAll { operator: ArrayIndexes =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -179,8 +184,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\[\\d+:\\]$".r
 
     s"""accept $pattern""" in {
-      forAll { arraySlice: ArraySlice.LeftBounded =>
-        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      forAll { operator: ArraySlice.LeftBounded =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -198,8 +203,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\[:\\d+\\]$".r
 
     s"""accept $pattern""" in {
-      forAll { arraySlice: ArraySlice.RightBounded =>
-        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      forAll { operator: ArraySlice.RightBounded =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -217,8 +222,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\[\\d+:\\d+\\]$".r
 
     s"""accept $pattern""" in {
-      forAll { arraySlice: ArraySlice.Bounded =>
-        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      forAll { operator: ArraySlice.Bounded =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -236,8 +241,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^(\\[\\d+:\\]|\\[:\\d+\\]|\\[\\d+:\\d+\\])$".r
 
     s"""accept $pattern""" in {
-      forAll { arraySlice: ArraySlice =>
-        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      forAll { operator: ArraySlice =>
+        parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }
     }
 
@@ -253,7 +258,7 @@ class OperatorSpec extends AnyWordSpec {
   "Operator" should {
     val parser = operator.any
 
-    """accept any""" in {
+    """accept any operator""" in {
       forAll { operator: Operator =>
         parser.parse(operator.toText).shouldMatchTo(Success(operator))
       }

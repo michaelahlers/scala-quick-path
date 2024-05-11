@@ -31,7 +31,7 @@ object Operator {
 
     case object MatchingWildcard extends DotNotatedChild {
       val toWildcard: Wildcard.type = Wildcard
-      override val toText: String            = s".${toWildcard.toText}"
+      override val toText: String   = s".${toWildcard.toText}"
     }
   }
 

@@ -4,6 +4,7 @@ import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
 import ahlers.tree.path.operator.Operator.ArrayIndexes
+import ahlers.tree.path.operator.Operator.ArraySlice
 import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
@@ -98,8 +99,8 @@ class OperatorSpec extends AnyWordSpec {
     val pattern = "^\\.[a-zA-Z0-9]+$".r
 
     s"""accept $pattern""" in {
-      forAll { matchingName: DotNotatedChild.MatchingName =>
-        parser.parse(matchingName.toText).shouldMatchTo(Success(matchingName))
+      forAll { dotNotatedChild: DotNotatedChild.MatchingName =>
+        parser.parse(dotNotatedChild.toText).shouldMatchTo(Success(dotNotatedChild))
       }
     }
 
@@ -174,6 +175,82 @@ class OperatorSpec extends AnyWordSpec {
     s"""accept $pattern""" in {
       forAll { arrayIndexes: ArrayIndexes =>
         parser.parse(arrayIndexes.toText).shouldMatchTo(Success(arrayIndexes))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!pattern.matches(input)) {
+          parser.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "ArraySlice.LeftBounded" should {
+    val parser  = operator.arraySliceLeftBounded
+    val pattern = "^\\[\\d+:\\]$".r
+
+    s"""accept $pattern""" in {
+      forAll { arraySlice: ArraySlice.LeftBounded =>
+        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!pattern.matches(input)) {
+          parser.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "ArraySlice.RightBounded" should {
+    val parser  = operator.arraySliceRightBounded
+    val pattern = "^\\[:\\d+\\]$".r
+
+    s"""accept $pattern""" in {
+      forAll { arraySlice: ArraySlice.RightBounded =>
+        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!pattern.matches(input)) {
+          parser.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "ArraySlice.Bounded" should {
+    val parser  = operator.arraySliceBounded
+    val pattern = "^\\[\\d+:\\d+\\]$".r
+
+    s"""accept $pattern""" in {
+      forAll { arraySlice: ArraySlice.Bounded =>
+        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
+      }
+    }
+
+    "reject else" in {
+      forAll { input: String =>
+        whenever(!pattern.matches(input)) {
+          parser.parse(input).shouldBe(a[Failure[_]])
+        }
+      }
+    }
+  }
+
+  "ArraySlice" should {
+    val parser  = operator.arraySlice
+    val pattern = "^(\\[\\d+:\\]|\\[:\\d+\\]|\\[\\d+:\\d+\\])$".r
+
+    s"""accept $pattern""" in {
+      forAll { arraySlice: ArraySlice =>
+        parser.parse(arraySlice.toText).shouldMatchTo(Success(arraySlice))
       }
     }
 

@@ -59,4 +59,19 @@ object Operator {
     val toText: String = toIndexes.map(_.toText).mkString("[", ",", "]")
   }
 
+  sealed trait ArraySlice extends Operator {
+    def toText: String
+  }
+  object ArraySlice {
+    case class LeftBounded(start: Index) extends ArraySlice {
+      override val toText: String = s"[${start.toText}:]"
+    }
+    case class RightBounded(end: Index) extends ArraySlice {
+      override val toText: String = s"[:${end.toText}]"
+    }
+    case class Bounded(start: Index, end: Index) extends ArraySlice {
+      override val toText: String = s"[${start.toText}:${end.toText}]"
+    }
+  }
+
 }

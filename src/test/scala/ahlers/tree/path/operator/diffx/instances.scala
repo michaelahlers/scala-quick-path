@@ -1,6 +1,6 @@
 package ahlers.tree.path.operator.diffx
 
-import ahlers.tree.path.operator.Operator.{Anchor, ArrayIndexes, BracketNotatedChildren, DeepScan, DotNotatedChild}
+import ahlers.tree.path.operator.Operator.{Anchor, ArrayIndexes, ArraySlice, BracketNotatedChildren, DeepScan, DotNotatedChild}
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
 import ahlers.tree.path.term.diffx.instances._
@@ -25,5 +25,10 @@ object instances {
   }
 
   implicit val diffArrayIndexes: Diff[ArrayIndexes]                                       = Diff.derived
+
+  implicit val diffArraySliceLeftBounded: Diff[ArraySlice.LeftBounded]                                       = Diff.derived
+  implicit val diffArraySliceRightBounded: Diff[ArraySlice.RightBounded]                                       = Diff.derived
+  implicit val diffArraySliceBounded: Diff[ArraySlice.Bounded]                                       = Diff.derived
+  implicit val diffArraySlice: Diff[ArraySlice]                                       = Diff.derived
 
 }

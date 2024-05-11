@@ -4,6 +4,7 @@ import ahlers.tree.path.operator.Operator.Anchor
 import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
 import ahlers.tree.path.operator.Operator.Anchor.RootElement
 import ahlers.tree.path.operator.Operator.ArrayIndexes
+import ahlers.tree.path.operator.Operator.ArraySlice
 import ahlers.tree.path.operator.Operator.BracketNotatedChildren
 import ahlers.tree.path.operator.Operator.DeepScan
 import ahlers.tree.path.operator.Operator.DotNotatedChild
@@ -33,5 +34,10 @@ object instances {
   }
 
   implicit val arbArrayIndexes: Arbitrary[ArrayIndexes] = ArbitraryDerivation[ArrayIndexes]
+
+  implicit val arbArraySliceLeftBounded: Arbitrary[ArraySlice.LeftBounded]   = ArbitraryDerivation[ArraySlice.LeftBounded]
+  implicit val arbArraySliceRightBounded: Arbitrary[ArraySlice.RightBounded] = ArbitraryDerivation[ArraySlice.RightBounded]
+  implicit val arbArraySliceBounded: Arbitrary[ArraySlice.Bounded]           = ArbitraryDerivation[ArraySlice.Bounded]
+  implicit val arbArraySlice: Arbitrary[ArraySlice]                          = ArbitraryDerivation[ArraySlice]
 
 }

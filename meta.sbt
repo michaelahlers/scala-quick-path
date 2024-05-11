@@ -7,3 +7,5 @@ developers += Developer(
   email = "michael@ahlers.consulting",
   url = url("https://ahlers.consulting"),
 )
+
+licenses := Seq("MIT" -> url(s"https://github.com/michaelahlers/${normalizedName.value}/blob/${version.value}/LICENSE"))

@@ -15,15 +15,15 @@ private object algebra {
     case class OfUnknown(override val toOperator: Operator)                       extends IsOperator(toOperator)
 
     def apply(operator: Operator): IsOperator = operator match {
-      case RootElement                                    => OfRootElement
-      case CurrentNode                                    => OfCurrentNode
-      case Wildcard                                       => OfWildcard
-      case DeepScan                                       => OfDeepScan
-      case dotNotatedChild: DotNotatedChild               => OfDotNotation(dotNotatedChild)
-      case bracketNotatedChildren: BracketNotatedChildren => OfBracketNotation(bracketNotatedChildren)
-      case arrayIndexes: ArrayIndexes                     => OfArrayIndexes(arrayIndexes)
-      case arraySlice: ArraySlice                         => OfArraySlice(arraySlice)
-      case operator                                       => OfUnknown(operator)
+      case RootElement                      => OfRootElement
+      case CurrentNode                      => OfCurrentNode
+      case Wildcard                         => OfWildcard
+      case DeepScan                         => OfDeepScan
+      case operator: DotNotatedChild        => OfDotNotation(operator)
+      case operator: BracketNotatedChildren => OfBracketNotation(operator)
+      case operator: ArrayIndexes           => OfArrayIndexes(operator)
+      case operator: ArraySlice             => OfArraySlice(operator)
+      case operator                         => OfUnknown(operator)
     }
   }
 

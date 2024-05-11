@@ -1,17 +1,9 @@
 package ahlers.tree.path.parser
 
-import ahlers.tree.path.operator.Operator.Anchor
-import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
-import ahlers.tree.path.operator.Operator.Anchor.RootElement
-import ahlers.tree.path.operator.Operator.ArrayIndexes
-import ahlers.tree.path.operator.Operator.ArraySlice
-import ahlers.tree.path.operator.Operator.BracketNotatedChildren
-import ahlers.tree.path.operator.Operator.DeepScan
-import ahlers.tree.path.operator.Operator.DotNotatedChild
+import ahlers.tree.path.operator.Operator._
 import ahlers.tree.path.operator.diffx.instances._
 import ahlers.tree.path.operator.scalacheck.instances._
 import com.softwaremill.diffx.scalatest.DiffShouldMatcher.convertToAnyShouldMatcher
-import org.scalatest.Checkpoints.Checkpoint
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks._
@@ -21,17 +13,12 @@ import parsley.diffx.instances._
 
 class OperatorSpec extends AnyWordSpec {
 
-  "Anchor" should {
-    val parser  = operator.anchor
-    val pattern = "^[@\\$]$".r
+  "RootElement" should {
+    val parser  = operator.rootElement
+    val pattern = "^\\$$".r
 
     s"""accept $pattern""" in {
-      val checkpoint = new Checkpoint()
-
-      checkpoint(parser.parse(CurrentNode.toText).shouldMatchTo(Success(CurrentNode: Anchor)))
-      checkpoint(parser.parse(RootElement.toText).shouldMatchTo(Success(RootElement: Anchor)))
-
-      checkpoint.reportAll()
+      parser.parse(RootElement.toText).shouldMatchTo(Success(RootElement))
     }
 
     "reject else" in {
@@ -60,12 +47,12 @@ class OperatorSpec extends AnyWordSpec {
     }
   }
 
-  "RootElement" should {
-    val parser  = operator.rootElement
-    val pattern = "^\\$$".r
+  "Wildcard" should {
+    val parser  = operator.wildcard
+    val pattern = "^\\*$".r
 
     s"""accept $pattern""" in {
-      parser.parse(RootElement.toText).shouldMatchTo(Success(RootElement))
+      parser.parse(Wildcard.toText).shouldMatchTo(Success(Wildcard))
     }
 
     "reject else" in {

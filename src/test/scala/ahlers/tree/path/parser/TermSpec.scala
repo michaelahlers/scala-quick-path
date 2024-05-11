@@ -2,7 +2,6 @@ package ahlers.tree.path.parser
 
 import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
-import ahlers.tree.path.term.Wildcard
 import ahlers.tree.path.term.diffx.instances._
 import ahlers.tree.path.term.scalacheck.instances._
 import com.softwaremill.diffx.scalatest.DiffShouldMatcher.convertToAnyShouldMatcher
@@ -52,22 +51,4 @@ class TermSpec extends AnyWordSpec {
       }
     }
   }
-
-  "Wildcard" should {
-    val parser  = term.wildcard
-    val pattern = "^\\*$".r
-
-    s"""accept $pattern""" in {
-      parser.parse(Wildcard.toText).shouldMatchTo(Success(Wildcard))
-    }
-
-    "reject else" in {
-      forAll { input: String =>
-        whenever(!pattern.matches(input)) {
-          parser.parse(input).shouldBe(a[Failure[_]])
-        }
-      }
-    }
-  }
-
 }

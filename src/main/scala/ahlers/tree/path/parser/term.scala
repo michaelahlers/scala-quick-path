@@ -2,9 +2,7 @@ package ahlers.tree.path.parser
 
 import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
-import ahlers.tree.path.term.Wildcard
 import parsley.Parsley
-import parsley.character.char
 import parsley.character.satisfy
 import parsley.character.stringOfSome
 
@@ -15,6 +13,4 @@ object term {
     val isValid: Set[Char] = ('a' to 'z').toSet ++ ('A' to 'Z').toSet ++ ('0' to '9').toSet
     stringOfSome(satisfy(isValid)).map(Name)
   }
-
-  val wildcard: Parsley[Wildcard.type] = char('*').as(Wildcard)
 }

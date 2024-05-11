@@ -1,16 +1,8 @@
 package ahlers.tree.path.parser
 
-import ahlers.tree.path.operator.Operator.Anchor
-import ahlers.tree.path.operator.Operator.Anchor.CurrentNode
-import ahlers.tree.path.operator.Operator.Anchor.RootElement
-import ahlers.tree.path.operator.Operator.ArrayIndexes
-import ahlers.tree.path.operator.Operator.ArraySlice
-import ahlers.tree.path.operator.Operator.BracketNotatedChildren
-import ahlers.tree.path.operator.Operator.DeepScan
-import ahlers.tree.path.operator.Operator.DotNotatedChild
+import ahlers.tree.path.operator.Operator.{ArrayIndexes, ArraySlice, BracketNotatedChildren, CurrentNode, DeepScan, DotNotatedChild, RootElement, Wildcard}
 import ahlers.tree.path.parser.term.index
 import ahlers.tree.path.parser.term.name
-import ahlers.tree.path.parser.term.wildcard
 import parsley.Parsley
 import parsley.Parsley.atomic
 import parsley.character.char
@@ -21,8 +13,10 @@ import parsley.combinator.sepBy
 object operator {
 
   val currentNode: Parsley[CurrentNode.type] = char('@').as(CurrentNode)
+
   val rootElement: Parsley[RootElement.type] = char('$').as(RootElement)
-  val anchor: Parsley[Anchor]                = currentNode | rootElement
+
+  val wildcard: Parsley[Wildcard.type] = char('*').as(Wildcard)
 
   val deepScan: Parsley[DeepScan.type] = string("..").as(DeepScan)
 

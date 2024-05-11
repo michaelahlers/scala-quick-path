@@ -2,20 +2,20 @@ package ahlers.tree.path.operator
 
 import ahlers.tree.path.term.Index
 import ahlers.tree.path.term.Name
-import ahlers.tree.path.term.Wildcard
 
 sealed trait Operator
 object Operator {
 
-  sealed trait Anchor extends Operator
-  object Anchor {
-    case object RootElement extends Anchor {
-      val toText: String = "$"
-    }
+  case object RootElement extends Operator {
+    val toText: String = "$"
+  }
 
-    case object CurrentNode extends Anchor {
-      val toText: String = "@"
-    }
+  case object CurrentNode extends Operator {
+    val toText: String = "@"
+  }
+
+  case object Wildcard {
+    val toText: String = "*"
   }
 
   case object DeepScan extends Operator {

@@ -5,7 +5,7 @@ ThisBuild / scalaVersion := "2.13.14"
  * @see [[https://github.com/j-mie6/parsley]]
  */
 libraryDependencies +=
-   "com.github.j-mie6" %% "parsley" % "4.5.2"
+  "com.github.j-mie6" %% "parsley" % "4.5.2"
 
 /**
  * ScalaTest is the most flexible and most popular testing tool in the Scala ecosystem.

@@ -1,7 +1,6 @@
 package ahlers.tree.path.filterOperators.diffx
 
-import ahlers.tree.path.filterOperators.FilterOperator
-import ahlers.tree.path.filterOperators.IsEqual
+import ahlers.tree.path.filterOperators.{FilterOperator, IsEqual, IsNotEqual}
 import ahlers.tree.path.filterOperators.algebra.IsFilterOperator
 import ahlers.tree.path.terms.diffx.instances._
 import com.softwaremill.diffx.Diff
@@ -9,6 +8,8 @@ import com.softwaremill.diffx.Diff
 object instances {
 
   implicit val diffIsEqual: Diff[IsEqual.type] = Diff.derived
+
+  implicit val diffIsNotEqual: Diff[IsNotEqual.type] = Diff.derived
 
   implicit val diffFilterOperator: Diff[FilterOperator] = {
     implicit val diffIsFilterOperator: Diff[IsFilterOperator] = {

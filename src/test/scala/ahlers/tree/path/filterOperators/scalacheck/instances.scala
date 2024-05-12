@@ -1,7 +1,7 @@
 package ahlers.tree.path.filterOperators.scalacheck
 
 import ahlers.tree.path.filterOperators.FilterOperator
-import ahlers.tree.path.filterOperators.IsEqual
+import ahlers.tree.path.filterOperators.IsEqualTo
 import ahlers.tree.path.filterOperators.algebra.IsFilterOperator
 import ahlers.tree.path.terms.Index
 import ahlers.tree.path.terms.Name
@@ -13,11 +13,11 @@ import org.scalacheck.Gen
 
 object instances {
 
-  implicit val arbEqual: Arbitrary[IsEqual.type] = Arbitrary(Gen.const(IsEqual))
+  implicit val arbEqual: Arbitrary[IsEqualTo.type] = Arbitrary(Gen.const(IsEqualTo))
 
   implicit val arbFilterOperator: Arbitrary[FilterOperator] = Arbitrary(Gen.oneOf(
-    arbitrary[IsEqual.type],
-    arbitrary[IsEqual.type],
+    arbitrary[IsEqualTo.type],
+    arbitrary[IsEqualTo.type],
   ))
 
 }

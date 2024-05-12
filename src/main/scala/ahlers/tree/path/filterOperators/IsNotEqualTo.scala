@@ -1,5 +1,5 @@
 package ahlers.tree.path.filterOperators
 
-object IsNotEqual extends FilterOperator {
+object IsNotEqualTo extends FilterOperator {
   override val toText: String = "!="
 }

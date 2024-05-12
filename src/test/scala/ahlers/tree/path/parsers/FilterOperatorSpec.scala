@@ -1,7 +1,7 @@
 package ahlers.tree.path.parsers
 
-import ahlers.tree.path.filterOperators.IsEqual
-import ahlers.tree.path.filterOperators.IsNotEqual
+import ahlers.tree.path.filterOperators.IsEqualTo
+import ahlers.tree.path.filterOperators.IsNotEqualTo
 import ahlers.tree.path.filterOperators.diffx.instances._
 import ahlers.tree.path.filterOperators.scalacheck.instances._
 import com.softwaremill.diffx.scalatest.DiffShouldMatcher._
@@ -19,7 +19,7 @@ class FilterOperatorSpec extends AnyWordSpec {
     val pattern = "^==$".r
 
     s"""accept $pattern""" in {
-      val filterOperator = IsEqual
+      val filterOperator = IsEqualTo
       parser.parse(filterOperator.toText).shouldMatchTo(Success(filterOperator))
     }
 
@@ -37,7 +37,7 @@ class FilterOperatorSpec extends AnyWordSpec {
     val pattern = "^!=$".r
 
     s"""accept $pattern""" in {
-      val filterOperator = IsNotEqual
+      val filterOperator = IsNotEqualTo
       parser.parse(filterOperator.toText).shouldMatchTo(Success(filterOperator))
     }
 

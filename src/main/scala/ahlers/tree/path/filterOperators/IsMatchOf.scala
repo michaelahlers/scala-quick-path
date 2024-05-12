@@ -1,5 +1,5 @@
 package ahlers.tree.path.filterOperators
 
-object IsMatchExpression extends FilterOperator {
+object IsMatchOf extends FilterOperator {
   override val toText: String = "=~"
 }

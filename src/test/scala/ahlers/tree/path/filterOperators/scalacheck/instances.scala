@@ -10,9 +10,9 @@ object instances {
   implicit val arbIsEqual: Arbitrary[IsEqualTo.type]                         = Arbitrary(Gen.const(IsEqualTo))
   implicit val arbIsNotEqual: Arbitrary[IsNotEqualTo.type]                   = Arbitrary(Gen.const(IsNotEqualTo))
   implicit val arbIsLessThan: Arbitrary[IsLessThan.type]                     = Arbitrary(Gen.const(IsLessThan))
-  implicit val arbIsLessThanOrEqual: Arbitrary[IsLessThanOrEqual.type]       = Arbitrary(Gen.const(IsLessThanOrEqual))
+  implicit val arbIsLessThanOrEqualTo: Arbitrary[IsLessThanOrEqualTo.type]       = Arbitrary(Gen.const(IsLessThanOrEqualTo))
   implicit val arbIsGreaterThan: Arbitrary[IsGreaterThan.type]               = Arbitrary(Gen.const(IsGreaterThan))
-  implicit val arbIsGreaterThanOrEqual: Arbitrary[IsGreaterThanOrEqual.type] = Arbitrary(Gen.const(IsGreaterThanOrEqual))
+  implicit val arbIsGreaterThanOrEqualTo: Arbitrary[IsGreaterThanOrEqualTo.type] = Arbitrary(Gen.const(IsGreaterThanOrEqualTo))
   implicit val arbIsMatchOf: Arbitrary[IsMatchOf.type]                       = Arbitrary(Gen.const(IsMatchOf))
   implicit val arbIsIn: Arbitrary[IsIn.type]                                 = Arbitrary(Gen.const(IsIn))
   implicit val arbIsNotIn: Arbitrary[IsNotIn.type]                           = Arbitrary(Gen.const(IsNotIn))
@@ -26,9 +26,9 @@ object instances {
     arbitrary[IsEqualTo.type],
     arbitrary[IsNotEqualTo.type],
     arbitrary[IsLessThan.type],
-    arbitrary[IsLessThanOrEqual.type],
+    arbitrary[IsLessThanOrEqualTo.type],
     arbitrary[IsGreaterThan.type],
-    arbitrary[IsGreaterThanOrEqual.type],
+    arbitrary[IsGreaterThanOrEqualTo.type],
     arbitrary[IsMatchOf.type],
     arbitrary[IsIn.type],
     arbitrary[IsNotIn.type],

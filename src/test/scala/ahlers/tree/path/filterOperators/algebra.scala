@@ -7,9 +7,9 @@ private object algebra {
     case object OfIsEqual                                               extends IsFilterOperator(IsEqualTo)
     case object OfIsNotEqual                                            extends IsFilterOperator(IsNotEqualTo)
     case object OfIsLessThan                                            extends IsFilterOperator(IsLessThan)
-    case object OfIsLessThanOrEqual                                     extends IsFilterOperator(IsLessThanOrEqual)
+    case object OfIsLessThanOrEqualTo                                   extends IsFilterOperator(IsLessThanOrEqualTo)
     case object OfIsGreaterThan                                         extends IsFilterOperator(IsGreaterThan)
-    case object OfIsGreaterThanOrEqual                                  extends IsFilterOperator(IsGreaterThanOrEqual)
+    case object OfIsGreaterThanOrEqualTo                                extends IsFilterOperator(IsGreaterThanOrEqualTo)
     case object OfIsMatchOf                                             extends IsFilterOperator(IsMatchOf)
     case object OfIsIn                                                  extends IsFilterOperator(IsIn)
     case object OfIsNotIn                                               extends IsFilterOperator(IsNotIn)
@@ -21,9 +21,21 @@ private object algebra {
     case class OfUnknown(override val toFilterOperator: FilterOperator) extends IsFilterOperator(toFilterOperator)
 
     def apply(operator: FilterOperator): IsFilterOperator = operator match {
-      case IsEqualTo    => OfIsEqual
-      case IsNotEqualTo => OfIsNotEqual
-      case operator     => OfUnknown(operator)
+      case IsEqualTo              => OfIsEqual
+      case IsNotEqualTo           => OfIsNotEqual
+      case IsLessThan             => OfIsLessThan
+      case IsLessThanOrEqualTo    => OfIsLessThanOrEqualTo
+      case IsGreaterThan          => OfIsGreaterThan
+      case IsGreaterThanOrEqualTo => OfIsGreaterThanOrEqualTo
+      case IsMatchOf              => OfIsMatchOf
+      case IsIn                   => OfIsIn
+      case IsNotIn                => OfIsNotIn
+      case IsSubsetOf             => OfIsSubsetOf
+      case IsAnyOf                => OfIsAnyOf
+      case IsNoneOf               => OfIsNoneOf
+      case HasSize                => OfHasSize
+      case IsEmpty                => OfIsEmpty
+      case operator               => OfUnknown(operator)
     }
   }
 

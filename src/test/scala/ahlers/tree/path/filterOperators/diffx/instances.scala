@@ -9,9 +9,9 @@ object instances {
   implicit val diffIsEqual: Diff[IsEqualTo.type]                         = Diff.derived
   implicit val diffIsNotEqual: Diff[IsNotEqualTo.type]                   = Diff.derived
   implicit val diffIsLessThan: Diff[IsLessThan.type]                     = Diff.derived
-  implicit val diffIsLessThanOrEqual: Diff[IsLessThanOrEqual.type]       = Diff.derived
+  implicit val diffIsLessThanOrEqualTo: Diff[IsLessThanOrEqualTo.type]       = Diff.derived
   implicit val diffIsGreaterThan: Diff[IsGreaterThan.type]               = Diff.derived
-  implicit val diffIsGreaterThanOrEqual: Diff[IsGreaterThanOrEqual.type] = Diff.derived
+  implicit val diffIsGreaterThanOrEqualTo: Diff[IsGreaterThanOrEqualTo.type] = Diff.derived
   implicit val diffIsMatchOf: Diff[IsMatchOf.type]                       = Diff.derived
   implicit val diffIsIn: Diff[IsIn.type]                                 = Diff.derived
   implicit val diffIsNotIn: Diff[IsNotIn.type]                           = Diff.derived

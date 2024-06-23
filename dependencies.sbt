@@ -5,7 +5,7 @@ ThisBuild / scalaVersion := "2.13.14"
  * @see [[https://www.scalatest.org/]]
  */
 libraryDependencies +=
-  "org.scalatest" %% "scalatest" % "3.2.18" % Test
+  "org.scalatest" %% "scalatest" % "3.2.19" % Test
 
 /**
  * Readable deltas for Scala case classes.

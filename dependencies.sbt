@@ -1,4 +1,4 @@
-ThisBuild / scalaVersion := "2.13.14"
+ThisBuild / scalaVersion := "2.13.16"
 
 /**
  * ScalaTest is the most flexible and most popular testing tool in the Scala ecosystem.
